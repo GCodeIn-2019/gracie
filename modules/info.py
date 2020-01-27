@@ -15,7 +15,7 @@ def help(phenny, input):
     try:
         helpurl = phenny.config.helpurl
     except AttributeError:
-        helpurl = "http://wiki.apertium.org/wiki/Begiak"
+        helpurl = "http://wiki.apertium.org/wiki/Begiak. Note that some commands listed there may not work."
 
     commands = [func for priority, commands in phenny.commands.items()
             for regex, funcs in commands.items() for func in funcs]
@@ -23,7 +23,7 @@ def help(phenny, input):
     if input.sender.startswith('#'):
         # channels get a brief message instead
         phenny.say(
-            "Hey there, I'm a friendly bot for #apertium. Say \".help\" "
+            "Hey there, I'm a friendly bot for ##gci-2019. Say \".help\" "
             "to me in private for a list of my commands or check out my help "
             "page at {helpurl}.".format(helpurl=helpurl))
     elif command:
