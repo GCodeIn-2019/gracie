@@ -294,28 +294,6 @@ thread_check_tz.commands = ['tzdb status']
 def setup(phenny):
     scrape_wiki_zones(phenny)
 
-<<<<<<< HEAD
-def beats(phenny, input):
-    """Shows the internet time in Swatch beats."""
-    beats = ((time.time() + 3600) % 86400) / 86.4
-    beats = int(math.floor(beats))
-    phenny.say('@%03i' % beats)
-beats.commands = ['beats']
-beats.priority = 'low'
-
-def divide(input, by):
-    return (input // by), (input % by)
-
-
-def tock(phenny, input):
-    """Shows the time from the USNO's atomic clock."""
-    info = web.head('http://tycho.usno.navy.mil/cgi-bin/timer.pl')
-    phenny.say('"' + info['Date'] + '" - tycho.usno.navy.mil')
-tock.commands = ['tock']
-tock.priority = 'high'
-
-=======
->>>>>>> upstream/master
 def npl(phenny, input):
     """Shows the time from NPL's SNTP server."""
     # for server in ('ntp1.npl.co.uk', 'ntp2.npl.co.uk'):
