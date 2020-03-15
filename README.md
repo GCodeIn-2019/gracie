@@ -13,7 +13,7 @@ will need to be updated to run on Python3 if they do not already. All of the
 core modules have been ported, removed, or replaced.
 
 ## Requirements
-* Python 3.4+
+* Python 3.5+
 * [python-requests](http://docs.python-requests.org/en/latest/)
 
 ## Installation
@@ -27,6 +27,14 @@ Enjoy!
 You will need the Python3 versions of `python-nose` and `python-mock`. To run
 the tests, simply run `nosetests3`.
 
+## SECURITY WARNING
+If security is a concern, **DISABLE `pester`**! It can be used to crash the bot with no admin permissions needed.
+
+    <botname>: pester <botname> tell <anyone> <anything>
+
+You may also want to disable `update`. Due to a known bug, spamming `.update` repeatedly makes the process go into the background.
+
 ## Authors
 * Sean B. Palmer, http://inamidst.com/sbp/
 * mutantmonkey, http://mutantmonkey.in
+* Apertium developers, especially GCI students

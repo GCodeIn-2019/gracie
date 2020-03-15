@@ -192,37 +192,40 @@ def scrape_wiki_time_zone_abbreviations(doc):
     column_names = [cell.text_content().strip() for cell in rows[0].findall('th')]
 
     for row in rows[1:]:
-        column = 0
+        try:
+            column = 0
 
-        for cell in row.findall('td'):
-            if column == column_names.index('Abbr.'):
-                code = cell.text
-            elif column == column_names.index('Name'):
-                name = find_safe(cell, 'a')
-            elif column == column_names.index('UTC offset'):
-                # Make sure to strip the UTC off the offset for processing purposes
-                offset = find_safe(cell, 'a')[3:]
+            for cell in row.findall('td'):
+                if column == column_names.index('Abbr.'):
+                    code = cell.text
+                elif column == column_names.index('Name'):
+                    name = find_safe(cell, 'a')
+                elif column == column_names.index('UTC offset'):
+                    # Make sure to strip the UTC off the offset for processing purposes
+                    offset = find_safe(cell, 'a')[3:]
 
-                offset = offset.replace('−', '-') # hyphen -> minus
+                    offset = offset.replace('−', '-') # hyphen -> minus
 
-                if offset.find(':') > 0:
-                    parts = offset.split(':')
-                    offset = int(parts[0]) + int(parts[1]) / 60
-                else:
-                    if offset == '':
-                        offset = 0
+                    if offset.find(':') > 0:
+                        parts = offset.split(':')
+                        offset = int(parts[0]) + int(parts[1]) / 60
+                    else:
+                        if offset == '':
+                            offset = 0
 
-                    offset = offset.strip('±') # ±00 -> 00
-                    offset = int(offset)
+                        offset = offset.strip('±') # ±00 -> 00
+                        offset = int(offset)
 
-            column += 1
+                column += 1
 
-        datapoint = (name, offset)
+            datapoint = (name, offset)
 
-        if code in data:
-            data[code].append(datapoint)
-        else:
-            data[code] = [datapoint]
+            if code in data:
+                data[code].append(datapoint)
+            else:
+                data[code] = [datapoint]
+        except:
+            pass
 
     return data
 
@@ -291,6 +294,7 @@ thread_check_tz.commands = ['tzdb status']
 def setup(phenny):
     scrape_wiki_zones(phenny)
 
+<<<<<<< HEAD
 def beats(phenny, input):
     """Shows the internet time in Swatch beats."""
     beats = ((time.time() + 3600) % 86400) / 86.4
@@ -310,6 +314,8 @@ def tock(phenny, input):
 tock.commands = ['tock']
 tock.priority = 'high'
 
+=======
+>>>>>>> upstream/master
 def npl(phenny, input):
     """Shows the time from NPL's SNTP server."""
     # for server in ('ntp1.npl.co.uk', 'ntp2.npl.co.uk'):
